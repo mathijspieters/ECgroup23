@@ -78,24 +78,11 @@ public class player23 implements ContestSubmission
 		else{
 			dHigh = Double.parseDouble(System.getProperty("dHigh"));
 		}
-		if (System.getProperty("mutationType") == null) {
-			mutationType_ = "cmaes";
-			CMAES = true;
-		}else{
-			mutationType_ = System.getProperty("mutationType");
-		}
-		if (System.getProperty("mutationFunction") == null) {
-			mutationFunction_ = "linearDecreasing";
-		}else{
-			mutationType_ = System.getProperty("mutationFunction");
-		}
-		if (System.getProperty("mutationDistribution") == null) {
-			mutationDistribution_ = "uniform";
-		}else{
-			mutationType_ = System.getProperty("mutationDistribution");
-		}
 
 
+		mutationType_ = System.getProperty("mutationType", "mutateStandard");
+    mutationFunction_ = System.getProperty("mutationFunction", "linearDecreasing");
+		mutationDistribution_ = System.getProperty("mutationDistribution", "gaussian");
 		parSize = Integer.parseInt(System.getProperty("parSize", "10"));
 		kidSize = Integer.parseInt(System.getProperty("lambda", "70"));
 		popSize = Integer.parseInt(System.getProperty("mu", "30"));
@@ -104,7 +91,9 @@ public class player23 implements ContestSubmission
 		if(mutationType_.equals("cmaes")){
 			CMAES = true;
 		}
-
+		if(mutationType_.equals("dgea")){
+			DGEA = true;
+		}
 		// Do sth with property values, e.g. specify relevant settings of your algorithm
         if(isMultimodal){
             if(hasStructure){
@@ -135,7 +124,7 @@ public class player23 implements ContestSubmission
 		  dict.put("k", k);
 			dict.put("sigma_bound", sigma_bound);
 
-   		// Initialize new population randomly
+			// Initialize new population randomly
    		Population pop = new Population(popSize, rnd_, util, dict);
    		pop.init();
 
@@ -143,6 +132,7 @@ public class player23 implements ContestSubmission
    		popCmaes.init();
 
    		int evalsNext = parSize + kidSize;
+
 
    		if(CMAES){
    			evalsNext = popSize;
@@ -164,7 +154,7 @@ public class player23 implements ContestSubmission
 				else{
 
 
-			 	// Select Parents
+					// Select Parents
 			 	pop.selectTournament(parSize);
 				//pop.selectTournament(parSize);
 

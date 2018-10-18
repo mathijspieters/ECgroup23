@@ -75,7 +75,6 @@ def show_all_stats():
 
 
 def runExperiment(mut_args, args_dict, f):
-    player = "player23Tweak"
 
     args = []
     for key in args_dict.keys():
@@ -109,7 +108,7 @@ def runExperiment(mut_args, args_dict, f):
 if __name__ == "__main__":
 
     params = {'-Dmu': 93, '-Dlambda': 217, '-DdLow': 0.016926841434103237, '-DdHigh': 0.23935788204849787, '-Dk': 9, '-Dparsize': 46} #"-DdLow":[0.00005, 0.04], "-DdHigh":[0.07, 0.5], "-Dvariance":[0.0001, 1]
-    mut_args = ["-DmutationType=test", "-DmutationFunction=static", "-DmutationDistribution=gaussian"]
+    mut_args = ["-DmutationType=cmaes", "-DmutationFunction=static", "-DmutationDistribution=gaussian"]
     f = "BentCigarFunction" #KatsuuraEvaluation #SchaffersEvaluation #BentCigarFunction
 
     runExperiment(mut_args, params, f)
