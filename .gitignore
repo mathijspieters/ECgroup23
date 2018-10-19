@@ -1,2 +1,3 @@
 #Ignore java classes
 *.class
+results/

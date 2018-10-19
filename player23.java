@@ -91,7 +91,7 @@ public class player23 implements ContestSubmission
 		if(mutationType_.equals("cmaes")){
 			CMAES = true;
 		}
-		if(mutationType_.equals("dgea")){
+		if(mutationType_.equals("mutateDG")){
 			DGEA = true;
 		}
 		// Do sth with property values, e.g. specify relevant settings of your algorithm
